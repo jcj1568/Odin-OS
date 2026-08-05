@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Hymdal — Brand Collateral, Round 2</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --page-bg:#0E1116; --stone:#8B9199; --frost:#ECEEF2; --line:#2A313C;
+    --navy:#142544; --gold:#E3B23C; --ink:#14171B; --paper:#F6F2E9;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  svg{ display:block; }
+  body{ background: var(--page-bg); color: var(--frost); font-family:'IBM Plex Sans', sans-serif; padding: 64px 48px 140px; }
+  .wrap{max-width: 1180px; margin: 0 auto;}
+  header{margin-bottom: 64px; border-bottom: 1px solid var(--line); padding-bottom: 36px;}
+  .eyebrow{ font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:0.18em; text-transform:uppercase; color:var(--stone); margin-bottom:16px; }
+  h1{ font-size: 30px; font-weight:600; margin-bottom:12px; }
+  header p{ color: var(--stone); font-size:15px; max-width:660px; line-height:1.6; }
+
+  section{ margin-bottom: 72px; }
+  .sec-title{ font-size:13px; font-family:'IBM Plex Mono', monospace; letter-spacing:0.12em; text-transform:uppercase; color:var(--stone); margin-bottom:20px; }
+
+  .wordmark{ font-family:'Space Grotesk', sans-serif; font-weight:700; letter-spacing:0.13em; display:flex; align-items:center; }
+  .hglyph{ height:0.72em; margin-right:0.09em; flex-shrink:0; }
+  .rule{ background: var(--gold); }
+
+  /* ---- Lockup row ---- */
+  .lockups{ display:grid; grid-template-columns: 1.3fr 1fr 1fr; gap:20px; }
+  .lockup-card{ background:var(--navy); border-radius:6px; padding:40px; display:flex; align-items:center; justify-content:center; }
+  .lockup-card.stacked{ flex-direction:column; gap:16px; }
+  .lockup-card .mark{ width:44px; height:44px; }
+  .lockup-card .word{ font-size:34px; color:var(--frost); }
+  .lockup-card.stacked .mark{ width:56px; height:56px; }
+  .lockup-card.icononly{ background:var(--navy); }
+  .lockup-card.icononly .mark{ width:64px; height:64px; }
+  .horiz-pair{ display:flex; align-items:center; gap:18px; }
+  .tiny-label{ font-family:'IBM Plex Mono', monospace; font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--stone); margin-top:10px; text-align:center; }
+
+  /* ---- App icon / favicon ---- */
+  .icon-row{ display:flex; gap:24px; align-items:flex-end; flex-wrap:wrap; }
+  .app-icon{ background:var(--navy); border-radius:22%; display:flex; align-items:center; justify-content:center; }
+  .app-icon .mark{ fill:var(--frost); }
+  .app-icon.gold{ background:var(--gold); }
+  .app-icon.gold .mark{ fill:var(--ink); }
+  .app-icon.lg{ width:140px; height:140px; } .app-icon.lg .mark{ width:76px; height:76px; }
+  .app-icon.md{ width:88px; height:88px; border-radius:20%;} .app-icon.md .mark{ width:48px; height:48px; }
+  .app-icon.sm{ width:48px; height:48px; border-radius:18%;} .app-icon.sm .mark{ width:26px; height:26px; }
+  .app-icon.xs{ width:16px; height:16px; border-radius:4px;} .app-icon.xs .mark{ width:9px; height:9px; }
+  .icon-label{ font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--stone); text-align:center; margin-top:10px; }
+
+  /* ---- Business card ---- */
+  .card-row{ display:flex; gap:24px; flex-wrap:wrap; }
+  .bcard{ width: 340px; height: 194px; border-radius:6px; padding:26px 28px; display:flex; flex-direction:column; justify-content:space-between; position:relative; }
+  .bcard.front{ background:var(--navy); color:var(--frost); }
+  .bcard.back{ background:var(--paper); color:var(--ink); }
+  .bcard .top .mark{ width:26px; height:26px; }
+  .bcard .top .word{ font-size:19px; margin-top:8px; }
+  .bcard .person{ font-size:13px; line-height:1.5; }
+  .bcard .person .role{ color:var(--gold); font-family:'IBM Plex Mono', monospace; font-size:10px; letter-spacing:0.08em; text-transform:uppercase; display:block; margin-bottom:4px; }
+  .bcard.back .contact{ font-family:'IBM Plex Mono', monospace; font-size:11px; line-height:1.9; color:#5C5340; }
+  .bcard.back .bigmark{ position:absolute; right:22px; top:22px; }
+  .bcard.back .bigmark .mark{ width:34px; height:34px; }
+
+  /* ---- Banner ---- */
+  .banner{ width:100%; aspect-ratio: 4/1; background:var(--navy); border-radius:6px; display:flex; align-items:center; justify-content:space-between; padding: 0 64px; overflow:hidden; position:relative; }
+  .banner .mark{ width:64px; height:64px; }
+  .banner .word{ font-size:42px; color:var(--frost); }
+  .banner .tag{ font-family:'IBM Plex Mono', monospace; font-size:13px; letter-spacing:0.08em; text-transform:uppercase; color:var(--gold); }
+  .banner .bg-mark{ position:absolute; right:-40px; top:50%; transform:translateY(-50%); opacity:0.06; }
+  .banner .bg-mark svg{ width:340px; height:340px; }
+
+  /* ---- Letterhead ---- */
+  .letterhead{ width:100%; aspect-ratio: 8.5/5; background:var(--paper); border-radius:4px; padding:44px 52px; color:var(--ink); display:flex; flex-direction:column; }
+  .letterhead .lh-top{ display:flex; align-items:center; gap:14px; padding-bottom:20px; border-bottom:2px solid var(--navy); margin-bottom:28px; }
+  .letterhead .lh-top .mark{ width:30px; height:30px; }
+  .letterhead .lh-top .word{ font-size:21px; color:var(--navy); }
+  .letterhead .lh-body{ flex:1; }
+  .letterhead .lh-body .line{ height:9px; background:#DCD3BC; border-radius:2px; margin-bottom:12px; }
+  .letterhead .lh-body .line.w60{ width:60%; } .letterhead .lh-body .line.w80{ width:80%; } .letterhead .lh-body .line.w40{ width:40%; }
+  .letterhead .lh-foot{ font-family:'IBM Plex Mono', monospace; font-size:10px; letter-spacing:0.06em; color:#8A7F63; padding-top:16px; border-top:1px solid #DCD3BC; }
+
+  /* ---- Deck title slide ---- */
+  .deck{ width:100%; aspect-ratio:16/9; background:var(--navy); border-radius:6px; padding:60px; display:flex; flex-direction:column; justify-content:space-between; position:relative; overflow:hidden; }
+  .deck .bg-mark{ position:absolute; left:-60px; bottom:-60px; opacity:0.05; }
+  .deck .bg-mark svg{ width:400px; height:400px; }
+  .deck .deck-top .mark{ width:30px; height:30px; }
+  .deck .deck-top .word{ font-size:19px; }
+  .deck .deck-title{ font-size:38px; font-weight:600; font-family:'IBM Plex Sans',sans-serif; max-width:70%; line-height:1.25; }
+  .deck .deck-sub{ font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--gold); letter-spacing:0.05em; margin-top:14px; }
+  .deck .deck-foot{ font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--stone); }
+
+  /* ---- Email signature ---- */
+  .sig{ background:var(--paper); border-radius:6px; padding:28px 32px; width:420px; color:var(--ink); }
+  .sig-row{ display:flex; gap:18px; align-items:center; }
+  .sig .mark{ width:34px; height:34px; }
+  .sig .sig-word{ font-size:17px; color:var(--navy); }
+  .sig-divider{ width:1px; height:44px; background:#D8CFB6; margin:0 4px; }
+  .sig-info{ font-family:'IBM Plex Sans', sans-serif; font-size:12.5px; line-height:1.6; }
+  .sig-info .name{ font-weight:600; }
+  .sig-info .role{ color:#7A6E4F; font-size:11.5px; }
+  .sig-info .links{ font-family:'IBM Plex Mono', monospace; font-size:10.5px; color:#8A7F63; margin-top:4px; }
+
+  /* ---- Guidelines ---- */
+  .gl-grid{ display:grid; grid-template-columns: 1fr 1fr; gap:32px; }
+  .gl-block{ background:#12161D; border:1px solid var(--line); border-radius:6px; padding:26px 28px; }
+  .gl-block h3{ font-size:13px; font-family:'IBM Plex Mono', monospace; letter-spacing:0.1em; text-transform:uppercase; color:var(--gold); margin-bottom:16px; }
+  .swatch-row{ display:flex; gap:10px; margin-bottom:14px; }
+  .sw{ width:44px; height:44px; border-radius:4px; flex-shrink:0; }
+  .gl-block p, .gl-block li{ font-size:13px; color:var(--stone); line-height:1.7; }
+  .gl-block ul{ padding-left:18px; margin-top:6px; }
+  .gl-block .hex{ font-family:'IBM Plex Mono', monospace; font-size:11px; }
+
+  .rationale{ color: var(--stone); font-size: 14px; line-height:1.7; max-width: 720px; margin-top:20px; }
+  .rationale b{ color: var(--frost); font-weight:500; }
+  footer{ border-top:1px solid var(--line); padding-top:28px; color:var(--stone); font-size:14px; line-height:1.7; max-width:700px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <svg width="0" height="0" style="position:absolute;">
+    <symbol id="hymdal-mark" viewBox="0 0 200 200">
+      <rect x="60" y="30" width="18" height="140"/>
+      <rect x="122" y="30" width="18" height="140"/>
+      <polygon points="69,102 131,58 131,80 69,124"/>
+    </symbol>
+  </svg>
+
+  <header>
+    <div class="eyebrow">Brand Collateral — Round 2</div>
+    <h1>Hymdal, rebuilt with the corrected hybrid H</h1>
+    <p>Same set of formats as before, now with the corrected hybrid H used consistently everywhere the wordmark appears — one mark, no exceptions by size or context. A guidelines block and two client-facing pieces are included at the end.</p>
+  </header>
+
+  <section>
+    <div class="sec-title">Primary Lockups</div>
+    <div class="lockups">
+      <div class="lockup-card">
+        <div class="horiz-pair">
+          <svg class="mark" viewBox="0 0 200 200"><use href="#hymdal-mark" fill="#ECEEF2"/></svg>
+          <div class="wordmark word">
+            <svg class="hglyph" viewBox="0 0 100 140"><polygon points="4.0,0.0 4.0,139.9 28.0,139.9 28.0,103.6 71.7,72.6 72.0,139.9 96.0,139.9 96.0,0.0 72.0,0.0 72.0,36.4 28.3,67.4 28.0,0.0" fill="#ECEEF2" stroke="#ECEEF2" stroke-width="2" stroke-linejoin="round"/></svg>YMDAL
+          </div>
+        </div>
+      </div>
+      <div class="lockup-card stacked">
+        <svg class="mark" viewBox="0 0 200 200"><use href="#hymdal-mark" fill="#ECEEF2"/></svg>
+        <div class="wordmark word" style="font-size:26px;"><svg class="hglyph" viewBox="0 0 100 140"><polygon points="4.0,0.0 4.0,139.9 28.0,139.9 28.0,103.6 71.7,72.6 72.0,139.9 96.0,139.9 96.0,0.0 72.0,0.0 72.0,36.4 28.3,67.4 28.0,0.0" fill="#ECEEF2" stroke="#ECEEF2" stroke-width="2" stroke-linejoin="round"/></svg>YMDAL</div>
+      </div>
+      <div class="lockup-card icononly">
+        <svg class="mark" viewBox="0 0 200 200"><use href="#hymdal-mark" fill="#ECEEF2"/></svg>
+      </div>
+    </div>
+    <p class="rationale">One wordmark, used the same way at every size — the primary horizontal lockup, the stacked version, and everything below all carry the same hybrid H now.</p>
+  </section>
+
+  <section>
+    <div class="sec-title">App Icon &amp; Favicon — including true small-size check</div>
+    <div class="icon-row">
+      <div><div class="app-icon lg"><svg class="mark" viewBox="0 0 200 200"><use href="#hymdal-mark"/></svg></div><div class="icon-label">App icon — navy</div></div>
+      <div><div class="app-icon lg gold"><svg class="mark" viewBox="0 0 200 200"><use href="#hymdal-mark"/></svg></div><div class="icon-label">App icon — gold</div></div>
+      <div><div class="app-icon md"><svg class="mark" viewBox="0 0 200 200"><use href="#hymdal-mark"/></svg></div><div class="icon-label">Social avatar</div></div>
+      <div><div class="app-icon sm"><svg class="mark" viewBox="0 0 200 200"><use href="#hymdal-mark"/></svg></div><div class="icon-label">Favicon (48px)</div></div>
+      <div><div class="app-icon xs"><svg class="mark" viewBox="0 0 200 200"><use href="#hymdal-mark"/></svg></div><div class="icon-label">Favicon (16px, actual size)</div></div>
+    </div>
+    <p class="rationale">The rightmost tile is rendered at literal 16×16px — the real size a browser tab uses. Worth checking on your own screen before finalizing; icon marks that read fine at 48px sometimes blur into a smudge at 16px.</p>
+  </section>
+
+  <section>
+    <div class="sec-title">Business Card</div>
+    <div class="card-row">
+      <div class="bcard front">
+        <div class="top">
+          <svg class="mark" viewBox="0 0 200 200"><use href="#hymdal-mark" fill="#ECEEF2"/></svg>
+          <div class="wordmark word"><svg class="hglyph" viewBox="0 0 100 140"><polygon points="4.0,0.0 4.0,139.9 28.0,139.9 28.0,103.6 71.7,72.6 72.0,139.9 96.0,139.9 96.0,0.0 72.0,0.0 72.0,36.4 28.3,67.4 28.0,0.0" fill="#ECEEF2" stroke="#ECEEF2" stroke-width="2" stroke-linejoin="round"/></svg>YMDAL</div>
+        </div>
+        <div class="person">
+          <span class="role">Founder</span>
+          James Johnson
+        </div>
+      </div>
+      <div class="bcard back">
+        <div class="bigmark"><svg class="mark" viewBox="0 0 200 200"><use href="#hymdal-mark" fill="#142544"/></svg></div>
+        <div class="top"></div>
+        <div class="contact">
+          hymdallabs.com<br/>
+          james@hymdallabs.com<br/>
+          Hymdal Labs, Inc.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-title">Social / Web Banner</div>
+    <div class="banner">
+      <div class="bg-mark"><svg viewBox="0 0 200 200"><use href="#hymdal-mark" fill="#ECEEF2"/></svg></div>
+      <div class="horiz-pair">
+        <svg class="mark" viewBox="0 0 200 200"><use href="#hymdal-mark" fill="#ECEEF2"/></svg>
+        <div class="wordmark word">
+          <svg class="hglyph" viewBox="0 0 100 140"><polygon points="4.0,0.0 4.0,139.9 28.0,139.9 28.0,103.6 71.7,72.6 72.0,139.9 96.0,139.9 96.0,0.0 72.0,0.0 72.0,36.4 28.3,67.4 28.0,0.0" fill="#ECEEF2" stroke="#ECEEF2" stroke-width="2" stroke-linejoin="round"/></svg>YMDAL
+        </div>
+      </div>
+      <div class="tag">The herald for modern business.</div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-title">Letterhead</div>
+    <div class="letterhead">
+      <div class="lh-top">
+        <svg class="mark" viewBox="0 0 200 200"><use href="#hymdal-mark" fill="#142544"/></svg>
+        <div class="wordmark word" style="color:#142544;"><svg class="hglyph" viewBox="0 0 100 140"><polygon points="4.0,0.0 4.0,139.9 28.0,139.9 28.0,103.6 71.7,72.6 72.0,139.9 96.0,139.9 96.0,0.0 72.0,0.0 72.0,36.4 28.3,67.4 28.0,0.0" fill="#142544" stroke="#142544" stroke-width="2" stroke-linejoin="round"/></svg>YMDAL</div>
+      </div>
+      <div class="lh-body">
+        <div class="line w40"></div>
+        <div class="line w80"></div>
+        <div class="line w60"></div>
+        <div class="line w80"></div>
+        <div class="line w40"></div>
+      </div>
+      <div class="lh-foot">HYMDAL LABS, INC. &nbsp;·&nbsp; HYMDALLABS.COM</div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-title">Deck Title Slide</div>
+    <div class="deck">
+      <div class="bg-mark"><svg viewBox="0 0 200 200"><use href="#hymdal-mark" fill="#ECEEF2"/></svg></div>
+      <div class="deck-top horiz-pair">
+        <svg class="mark" viewBox="0 0 200 200"><use href="#hymdal-mark" fill="#ECEEF2"/></svg>
+        <div class="wordmark word" style="color:#ECEEF2;"><svg class="hglyph" viewBox="0 0 100 140"><polygon points="4.0,0.0 4.0,139.9 28.0,139.9 28.0,103.6 71.7,72.6 72.0,139.9 96.0,139.9 96.0,0.0 72.0,0.0 72.0,36.4 28.3,67.4 28.0,0.0" fill="#ECEEF2" stroke="#ECEEF2" stroke-width="2" stroke-linejoin="round"/></svg>YMDAL</div>
+      </div>
+      <div>
+        <div class="deck-title">AI Systems Assessment<br/>— Prepared for [Client]</div>
+        <div class="deck-sub">The herald for modern business.</div>
+      </div>
+      <div class="deck-foot">HYMDAL LABS &nbsp;·&nbsp; CONFIDENTIAL &nbsp;·&nbsp; [DATE]</div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-title">Email Signature</div>
+    <div class="sig">
+      <div class="sig-row">
+        <svg class="mark" viewBox="0 0 200 200"><use href="#hymdal-mark" fill="#142544"/></svg>
+        <div class="wordmark sig-word" style="color:#142544;"><svg class="hglyph" viewBox="0 0 100 140"><polygon points="4.0,0.0 4.0,139.9 28.0,139.9 28.0,103.6 71.7,72.6 72.0,139.9 96.0,139.9 96.0,0.0 72.0,0.0 72.0,36.4 28.3,67.4 28.0,0.0" fill="#142544" stroke="#142544" stroke-width="2" stroke-linejoin="round"/></svg>YMDAL</div>
+        <div class="sig-divider"></div>
+        <div class="sig-info">
+          <div class="name">James Johnson</div>
+          <div class="role">Founder, Hymdal Labs</div>
+          <div class="links">hymdallabs.com &nbsp;·&nbsp; james@hymdallabs.com</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-title">Quick Reference — Colors &amp; Type</div>
+    <div class="gl-grid">
+      <div class="gl-block">
+        <h3>Color</h3>
+        <div class="swatch-row">
+          <div class="sw" style="background:#142544;"></div>
+          <div class="sw" style="background:#E3B23C;"></div>
+          <div class="sw" style="background:#ECEEF2;"></div>
+          <div class="sw" style="background:#14171B;"></div>
+        </div>
+        <p><span class="hex">Navy #142544</span> — primary background<br/>
+        <span class="hex">Gold #E3B23C</span> — accent only, never body text at small size<br/>
+        <span class="hex">Frost #ECEEF2</span> — text on navy<br/>
+        <span class="hex">Ink #14171B</span> — text on gold or paper</p>
+      </div>
+      <div class="gl-block">
+        <h3>Usage rules</h3>
+        <ul>
+          <li>Hagalaz-H wordmark is now the one consistent lockup — used everywhere, no separate "plain" version</li>
+          <li>Icon mark needs min. 24px clearspace on all sides equal to the icon's own width</li>
+          <li>Gold never used for body copy — accent and single-line taglines only</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    Beyond what's here, three things worth doing before this goes out into the world: (1) finish the USPTO trademark search on "Hymdal" in software/AI classes that we flagged earlier and never closed the loop on — collateral is cheap to redo now, expensive to redo after it's on client-facing material; (2) check the navy/gold and gold/black color pairs against WCAG contrast minimums if any of this ends up in a web UI, not just print/static images; (3) view the 16px favicon on an actual browser tab, not just in this mockup, since screen rendering can differ slightly from this preview.
+  </footer>
+
+</div>
+</body>
+</html>
