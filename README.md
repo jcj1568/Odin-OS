@@ -2,9 +2,9 @@
 
 Hymdal Labs' personal operating agent — see `hymdal-managed-agent-architecture.md`
 and `hymdal-managed-agent-build-plan.md` for the full design and phased
-build plan. This is the Phase 0 local scaffold: no live VPS, Supabase
-project, n8n instance, or Slack app exists yet — those are separate build
-tasks.
+build plan. Phase 0 status: Supabase (schema, logging) and Slack
+(sending, via bot user `thor`) are live and verified. Still outstanding:
+VPS provisioning, n8n, and two-way Slack (needs Socket Mode or the VPS).
 
 ## Setup
 
@@ -28,17 +28,33 @@ uv run main.py
 - `odin/action_log.py` — writes every action to stderr + Supabase
 - `odin/tools/n8n.py` — n8n workflow tools, exposed as an MCP server
 - `odin/mcp/supabase_client.py` — Supabase client factory
-- `odin/comms/slack_stub.py` — placeholder until a real Slack app exists
+- `odin/comms/slack.py` — Slack bot integration; `send_message` is live,
+  `start_listener` still needs Socket Mode or a VPS-hosted endpoint
 - `db/001_logging_and_onboarding.sql` — Supabase schema to run once a
   project exists
 
-## Known gaps (tracked, not accidental)
+## Verified so far
 
-- `claude_agent_sdk`'s hook API shape in `main.py` is written from
-  training-era knowledge and not yet verified against the installed
-  package. Run
-  `python -c "import claude_agent_sdk, inspect; print(inspect.signature(claude_agent_sdk.ClaudeAgentOptions))"`
-  after `uv sync` and adjust if it's drifted.
-- `ODIN_MODEL_DEFAULT` / `ODIN_MODEL_ESCALATION` default to `claude-sonnet-4-6`
-  / `claude-opus-4-7` per CLAUDE.md's architecture decision — confirm these
-  match real published model IDs before a live deploy.
+- `claude_agent_sdk`'s hook API shape in `main.py` was checked against
+  the installed package (`inspect.signature`) — matches as written.
+- `ODIN_MODEL_DEFAULT` (`claude-sonnet-4-6`) resolves and responds
+  correctly via a live `ClaudeSDKClient` round-trip.
+- Supabase: schema migrated, `service_role` granted, `log_action()`
+  confirmed writing real rows to `hymdal.odin_action_log`. See
+  `db/002_grant_service_role.sql` for a gotcha (non-`public` schemas
+  need explicit grants) if this is ever repeated for another venture.
+- Slack: bot token confirmed against the live Hymdal Labs workspace,
+  `send_message()` confirmed posting to a real channel.
+
+## Known gaps
+
+- Direct Postgres connections must use the **connection pooler** host
+  (`aws-0-<region>.pooler.supabase.com:6543`, username
+  `postgres.<project_ref>`) — the direct `db.<ref>.supabase.co` host is
+  IPv6-only and unreachable on networks without an IPv6 route.
+- `uv`'s own downloaded Python can be blocked by Windows Application
+  Control policies on locked-down machines (`unicodedata` DLL load
+  failure). If so, point `.venv` at a system-installed Python instead.
+- Slack `start_listener()` (two-way interaction) needs either
+  `SLACK_APP_TOKEN` (Socket Mode) or a VPS-hosted Events API endpoint —
+  neither exists yet.

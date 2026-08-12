@@ -3,8 +3,10 @@ Odin — Hymdal Labs' personal operating agent.
 
 Entry point for running Odin as a persistent Claude Agent SDK process
 (architecture doc: "persistent process, not one-shot CLI invocations").
-Phase 0: local/interactive run only — Slack wiring is a stub
-(see odin/comms/slack_stub.py) until build task 5 is real.
+Phase 0: local/interactive run only. Slack sending is real
+(odin/comms/slack.py) but not yet wired into this loop as a tool; the
+listener side (start_listener) still needs Socket Mode or a VPS-hosted
+Events API endpoint.
 
 NOTE: the hooks block below is the part of this file most likely to need
 adjustment against the currently-installed claude-agent-sdk version —
